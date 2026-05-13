@@ -3,294 +3,288 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width,initial-scale=1.0">
-<title>社畜生活 v3</title>
+<title>社畜生活</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#1a1a2e;color:#e0e0e0;min-height:100vh;display:flex;justify-content:center}
-#game{width:100%;max-width:720px;min-height:100vh;display:flex;flex-direction:column;background:#16213e;box-shadow:0 0 40px rgba(0,0,0,.5)}
-#hd{background:linear-gradient(135deg,#0f3460,#1a1a2e);padding:12px 16px;border-bottom:2px solid #e94560;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-#hd h1{font-size:16px;color:#e94560}
-#st{display:flex;gap:8px;font-size:11px}
-.st{padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.08)}
-.st.m{color:#ffd700}.st.h{color:#4ecca3}.st.l{color:#ff6b9d}
-#sc{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
-.img{text-align:center;font-size:48px;margin:4px 0}
-.tl{font-size:18px;font-weight:bold;color:#fff;text-align:center}
-.desc{line-height:1.7;font-size:14px;color:#c0c0c0;white-space:pre-wrap}
-#ch{padding:12px 16px;display:flex;flex-direction:column;gap:7px;border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.2)}
-.c{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#e0e0e0;padding:11px 14px;border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;line-height:1.4}
-.c:hover{background:rgba(233,69,96,.15);border-color:#e94560;transform:translateX(3px)}
-.c .k{display:inline-block;background:rgba(255,255,255,.1);padding:0 6px;border-radius:3px;margin-right:7px;font-size:11px;color:#888}
+#g{width:100%;max-width:720px;min-height:100vh;display:flex;flex-direction:column;background:#16213e;box-shadow:0 0 40px rgba(0,0,0,.5)}
+#h{background:linear-gradient(135deg,#0f3460,#1a1a2e);padding:12px 16px;border-bottom:2px solid #e94560;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+#h h1{font-size:16px;color:#e94560}
+#s{display:flex;gap:8px;font-size:11px}
+.s{padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.08)}
+.s.m{color:#ffd700}.s.h{color:#4ecca3}.s.l{color:#ff6b9d}
+#c{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.img{text-align:center;font-size:56px;margin:4px 0}
+.tl{font-size:18px;font-weight:bold;color:#fff;text-align:center;margin:0 0 8px}
+.ds{line-height:1.7;font-size:14px;color:#c0c0c0;white-space:pre-wrap}
+#cx{padding:12px 16px;display:flex;flex-direction:column;gap:7px;border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.2)}
+.bt{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#e0e0e0;padding:11px 14px;border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;line-height:1.4}
+.bt:hover{background:rgba(233,69,96,.15);border-color:#e94560;transform:translateX(3px)}
+.bt .k{display:inline-block;background:rgba(255,255,255,.1);padding:0 6px;border-radius:3px;margin-right:7px;font-size:11px;color:#888}
 #lg{padding:8px 16px;font-size:11px;color:#555;border-top:1px solid rgba(255,255,255,.04);max-height:60px;overflow-y:auto;display:none}
 #rt{background:transparent;border:1px solid rgba(255,255,255,.15);color:#888;padding:3px 10px;border-radius:5px;font-size:11px;cursor:pointer;transition:all .2s;font-family:inherit}
 #rt:hover{border-color:#e94560;color:#e94560}
 </style>
 </head>
 <body>
-<div id=game>
-<div id=hd>
+<div id=g>
+<div id=h>
 <h1>社畜生活</h1>
-<div id=st>
-<span class="st m">💰<span id=m></span></span>
-<span class="st h">❤️<span id=h></span></span>
-<span class="st l">💕<span id=l></span></span>
+<div id=s>
+<span class="s m">💰<span id=m></span></span>
+<span class="s h">❤️<span id=h></span></span>
+<span class="s l">💕<span id=l></span></span>
 </div>
-<button id=rt onclick=rst()>↻</button>
+<button id=rt onclick=rs()>↻</button>
 </div>
-<div id=sc></div>
-<div id=ch></div>
+<div id=c></div>
+<div id=cx></div>
 <div id=lg></div>
 </div>
+
 <script>
-// ====== 状态 ======
-var D={mon:1000,hp:100,lv:50,sex:"",log:[],fl:{},sc:"",day:1,gs:[]};
-function init(){D={mon:1000,hp:100,lv:50,sex:"",log:[],fl:{},sc:"",day:1,gs:[]}}
+var D={m:1000,h:100,l:50,s:"",lg:[],fl:{},sc:"",d:1};
+function ini(){D={m:1000,h:100,l:50,s:"",lg:[],fl:{},sc:"",d:1}}
 function up(){
-  document.getElementById("m").textContent=D.mon>=10000?(D.mon/10000).toFixed(1)+"w":D.mon;
-  document.getElementById("h").textContent=D.hp;document.getElementById("l").textContent=D.lv;
+  document.getElementById("m").textContent=D.m>=10000?(D.m/10000).toFixed(1)+"w":D.m;
+  document.getElementById("h").textContent=D.h;document.getElementById("l").textContent=D.l;
 }
-function ad(t,ty){D.log.push({t:t,ty:ty})}
-function am(a){D.mon+=a;if(a>0)ad("💰+"+a);else ad("💰"+a);if(D.mon<0)D.mon=0}
-function ah(a){D.hp+=a;if(a>0)ad("❤️+"+a);else ad("❤️"+a);if(D.hp<0)D.hp=0;if(D.hp>100)D.hp=100}
-function al(a){D.lv+=a;if(a>0)ad("💕+"+a);else ad("💕"+a);if(D.lv<0)D.lv=0;if(D.lv>100)D.lv=100}
+function ad(t){D.lg.push({t:t})}
+function am(a){D.m+=a;if(a>0)ad("💰+"+a);else ad("💰"+a);if(D.m<0)D.m=0}
+function ah(a){D.h+=a;if(a>0)ad("❤️+"+a);else ad("❤️"+a);if(D.h<0)D.h=0;if(D.h>100)D.h=100}
+function al(a){D.l+=a;if(a>0)ad("💕+"+a);else ad("💕"+a);if(D.l<0)D.l=0;if(D.l>100)D.l=100}
 function pk(a){return a[Math.floor(Math.random()*a.length)]}
 function go(i){D.sc=i;rd()}
 function rd(){
-  var s=document.getElementById("sc"),c=document.getElementById("ch"),l=document.getElementById("lg");
-  var sc=sn[D.sc];if(!sc){s.innerHTML="";c.innerHTML="";return}
-  if(sc.con&&!sc.con()){go(sc.fb||"start");return}
+  var a=document.getElementById("c"),b=document.getElementById("cx"),c=document.getElementById("lg");
+  var sc=sn[D.sc];if(!sc){a.innerHTML="";b.innerHTML="";return}
+  if(sc.cd&&!sc.cd()){go(sc.fb||"start");return}
   var d=typeof sc.d==="function"?sc.d():sc.d;
   var t=typeof sc.t==="function"?sc.t():sc.t;
   var h="";if(sc.im)h+="<div class=img>"+sc.im+"</div>";if(t)h+="<div class=tl>"+t+"</div>";
-  if(d)h+="<div class=desc>"+(typeof d==="string"?d.replace(/\n/g,"<br>"):d)+"</div>";s.innerHTML=h;
-  if(sc.ci){c.innerHTML=sc.ci.map(function(x,i){
-    if(x.con&&!x.con())return"";
+  if(d)h+="<div class=ds>"+(typeof d==="string"?d.replace(/\n/g,"<br>"):d)+"</div>";a.innerHTML=h;
+  if(sc.ch){b.innerHTML=sc.ch.map(function(x,i){
+    if(x.cd&&!x.cd())return "";
     var lb=["❶","❷","❸","❹","❺","❻","❼","❽"][i]||"#"+(i+1);
-    return '<button class=c onclick=ch('+i+')><span class=k>'+lb+"</span>"+x.t+"</button>";
-  }).join("")}else c.innerHTML="";
-  if(D.log.length>0){l.style.display="block";l.innerHTML=D.log.slice(-4).reverse().map(function(x){return'<div>'+x.t+'</div>'}).join("")}
-  up();s.scrollTop=0;
+    return '<button class=bt onclick=ch('+i+')><span class=k>'+lb+"</span>"+x.t+"</button>";
+  }).join("")}else b.innerHTML="";
+  if(D.lg.length>0){c.style.display="block";c.innerHTML=D.lg.slice(-4).reverse().map(function(x){return"<div>"+x.t+"</div>"}).join("")}
+  up();a.scrollTop=0;
 }
 function ch(i){
-  var sc=sn[D.sc];if(!sc||!sc.ci||!sc.ci[i])return;
-  var x=sc.ci[i];if(x.e)x.e();if(x.g)go(x.g);
-  if(D.hp<=0)setTimeout(function(){go("go")},400);up();
+  var sc=sn[D.sc];if(!sc||!sc.ch||!sc.ch[i])return;
+  var x=sc.ch[i];if(x.e)x.e();if(x.g)go(x.g);
+  if(D.h<=0)setTimeout(function(){go("go")},400);up();
 }
-function rst(){if(!confirm("重新开始？所有进度消失"))return;init();go("start")}
+function rs(){if(!confirm("重新开始?"))return;ini();go("start")}
 
-// ====== 随机内容大池子 ======
-// 每天随机生成3个"生活片段"，每次重玩完全重新抽
+// === STORY DATA ===
+// All text uses ONLY double quotes. No single quotes inside values.
+// Chinese guillemets (「」) are used for quoted speech in stories.
+// No backslash-escaped quotes anywhere.
 
-var EVENTS={
-  morning:[
-    "今天地铁特别挤，被人群推着走了一路。",
-    "早餐摊阿姨说好久没见你了，给你多加了个蛋。",
-    "出门就下雨，没带伞。跑到公交站浑身湿了一半。",
-    "电梯里遇到一个超帅的小哥哥，心跳了一下。",
-    "闹钟没响，差点迟到。脸都没洗就冲出门。",
-    "在早餐摊看到林小雅也在买包子，穿着居家服，头发随便扎着。",
-    "楼下野猫生了窝小猫，奶声奶气地叫。",
-    "手机只剩5%电，充电宝忘带了。",
-    "今天太阳特别好，心情莫名不错。"
-  ],
-  office:[
-    "boss又在会议室拍桌子，隔两层楼都听得见。",
-    "同事偷偷投屏了B站鬼畜视频，整个部门笑成一片。",
-    "新来的实习生帮你泡了杯咖啡，加了颗小心心拉花。",
-    "有人在茶水间冰箱里放了一盒切好的水果，附纸条：随便吃。",
-    "下午茶时间，行政姐姐叫了奶茶，你被算上了。",
-    "boss路过你工位，盯着你屏幕看了三秒。你正在摸鱼。",
-    "前台收到了一大束玫瑰，卡片写：第六百三十天。",
-    "同事群在传boss年轻时的非主流照片，收获一堆哈哈哈。",
-    "空调坏了，办公室又闷又热。技术主管光膀子打代码。",
-    "财务大姐在发喜糖——女儿订婚了。全公司沾喜气。"
-  ],
-  boss:[
-    "王扒皮叫你进办公室：这个方案今晚之前给我。",
-    "boss今天心情不错，开会时难得没骂人。还讲了个冷笑话。",
-    "王扒皮在走廊打电话：老婆我错了……声音很小。",
-    "boss发了条朋友圈：又是奋斗的一天。定位却在按摩店。",
-    "王扒皮让你帮他取快递，箱子挺沉。你晃了晃，听到瓶瓶罐罐的声音。",
-    "今天boss穿了一身亮粉色西装，全公司憋着不敢笑。"
-  ],
-  afterWork:[
-    "下班路上看到一对情侣在吵架，女的把奶茶摔在地上。",
-    "地铁上有人弹吉他卖唱，唱的是《成都》。你扫了五块钱。",
-    "路边卖烤红薯的大爷说这是今年最后一批了。买了两个。",
-    "商场门口在搞活动，扫码送小礼品。你扫码拿到一包纸巾。",
-    "在便利店遇到一个超可爱的女生在挑关东煮。",
-    "天桥上有人在卖小狗，毛茸茸的冲你摇尾巴。",
-    "前面走着一个穿汉服的小姐姐，风吹起来像仙女。",
-    "路过健身房，教练递传单：帅哥/美女，健身了解一下？",
-    "广场舞大妈换了新曲，比原版还带劲。"
-  ],
-  night:[
-    "洗完澡发现停水了——头发上的泡沫还没冲干净。",
-    "点了个外卖，半小时了还没接单。饿得胃痛。",
-    "隔壁传来奇怪的声音……你默默戴上耳机。",
-    "林小雅发了条朋友圈：失眠。配了一张月亮照片。",
-    "刷到一部很好看的擦边网剧，一口气看了四集。",
-    "手机推送：你关注的舞蹈区UP主更新了。",
-    "房东阿姨发微信：下个月涨租200。",
-    "有人在楼下弹吉他，弹的是周杰伦。你靠在窗边听了很久。",
-    "电费欠费通知来了，赶紧交了200。"
-  ],
-  spicy:[
-    "正做梦呢，被楼上蹦迪声吵醒。看了看时间——凌晨两点。",
-    "在地铁上，对面一个穿JK的妹子一直看你，你看回去她就低头笑。",
-    "同事偷偷告诉你：boss昨天在酒店被人拍到了。不是自己老婆。",
-    "你在公司电脑上发现了上一个同事留下的隐藏文件夹……",
-    "林小雅约你周末去她家吃饭。你心跳加速了一整天。",
-    "阿强递给你一本杂志，封面是性感写真。他说这是上一期滞销货。",
-    "半夜有人敲错门，打开是个喝醉的女生：对不起走错了……你真好看。",
-    "刷到前任的动态——又在秀恩爱。你把她屏蔽了。",
-    "体检报告出来了，好几项标红。你决定这周开始养生。",
-    "公司群突然有人匿名发了一张照片……群瞬间炸了。"
-  ]
-};
-
-// 合成每天的生活——从每个事件池抽1条，拼成段子
-function dailyLife(){
-  var lines=[];
-  lines.push("🌅 早晨："+pk(EVENTS.morning));
-  lines.push("🏢 办公室："+pk(EVENTS.office));
-  lines.push("👔 boss相关："+pk(EVENTS.boss));
-  lines.push("🌇 下班路上："+pk(EVENTS.afterWork));
-  lines.push("🌙 夜晚："+pk(EVENTS.night));
-  // 擦边随机
-  if(Math.random()>0.5)lines.push("🔥 意外："+pk(EVENTS.spicy));
-  return lines.join("\n");
-}
-
-// 随机人物对话
-var CHATS={
-  colleague:[
-    "你听说了吗？技术主管跟产品经理打起来了，因为一个按钮的位置。",
-    "中午吃什么？楼下新开了家麻辣烫，去试试？",
-    "boss今天穿的那身，我以为是来参加葬礼的。",
-    "我昨天看到boss跟一个女的在咖啡厅……那女的不像他老婆。",
-    "你最近气色不错，是不是谈恋爱了？",
-    "年终奖可能要砍半，财务大姐偷偷跟我说的。",
-    "新来的hr长得好像那个网红。你注意到了吗？"
-  ],
-  lover:[
-    "你今天……有点好看。",
-    "周末有空吗？我知道一家不错的店。",
-    "你最近老加班，别太累了。",
-    "你是不是对我有什么想法？",
-    "晚上要不要一起吃饭？我请客。",
-    "你身上好香。换沐浴露了？",
-    "我好像……有点喜欢上你了。"
-  ]
-};
-
-function rp(pool){return pool[Math.floor(Math.random()*pool.length)]}
-
-// ====== 场景 ======
 var sn={};
 
-sn.start={im:"🌃",t:"社畜生活 v3",d:"每次重玩都是全新的世界。\n所有的故事、对话、事件——全部随机生成，永不重复。\n\n先选一个角色：",ci:[
-  {t:"👨 男生线 —— 社畜小哥+林小雅线",e:function(){D.sex="male"},g:"intro"},
-  {t:"👩 女生线 —— 社畜妹子+神秘邻居线",e:function(){D.sex="female"},g:"intro"}
+var MORNINGS=[
+  function(){
+    D.h-=2;
+    return "闹钟响了六遍你才醒来。窗外灰蒙蒙的，下着小雨。\n你翻了个身想再躺五分钟，结果一闭眼就是半小时。\n\n你骂了一声从床上弹起来，用最快的速度洗漱换衣服。\n出门的时候看到隔壁门缝里塞着一封信——白色信封，没有署名。\n你犹豫了一下，还是没捡。";
+  },
+  function(){
+    D.h+=5;D.l+=3;
+    return "今天醒得特别早。阳光从窗帘缝隙里漏进来，暖洋洋的。\n你伸了个懒腰，听到隔壁传来音乐声——节奏感很强的舞曲。\n\n你想了想，林小雅应该是在练舞。\n你靠在墙上听了一会儿，嘴角不自觉地翘了起来。\n\n洗漱的时候照镜子：今天气色不错。";
+  },
+  function(){
+    D.m-=5;
+    return "被楼下装修的电钻声吵醒。才早上七点半。\n你顶着鸟窝头去楼下买早餐，阿强看到你笑：\n哟，昨晚干嘛去了？这黑眼圈都快掉到下巴了。\n\n你白了他一眼，买了两个包子和一杯豆浆。\n阿强又补了一句：对了，昨天有个女的来找你，长得挺漂亮。我说你不在，她就走了。\n\n你愣住了。谁啊？";
+  },
+  function(){
+    D.h-=5;D.l+=3;
+    return "昨晚失眠到凌晨三点。翻来覆去想了很多事——\n工作、房租、未来……以及，为什么还是一个人。\n\n早上顶着两个黑眼圈出门，在电梯里碰到了林小雅。\n她看了你一眼：昨晚没睡好？\n\n声音带着点关切。你点了点头。\n她也叹了口气：我也失眠了。今天怕是要靠咖啡续命了。\n\n电梯到了一楼，她冲你笑了笑：加油。";
+  }
+];
+
+var OFFICES=[
+  function(){
+    D.m+=15;D.h-=5;D.l+=2;
+    return "今天公司特别忙。boss接了个大项目，整个部门鸡飞狗跳。\n\n十点钟的会议上，王扒皮在黑板上画了一堆谁都看不懂的流程图。\n他说：这个方案，周五之前我要看到！他一拍桌子，白板笔都飞了。\n\n会后周雨桐凑过来：他到底在说什么？你听懂了吗？\n你摇了摇头。她笑了：行，那咱俩自己琢磨。晚上一起加班？";
+  },
+  function(){
+    D.l+=5;D.h+=3;
+    return "今天办公室氛围出奇地轻松。boss出差了，不在公司。\n\n技术主管带头摸鱼，不知道谁投屏了《猫和老鼠》，整个部门笑成一片。\n周雨桐不知道从哪搞来一盒蛋挞，挨个工位发。\n\n走到你这里时她停了一下：这个给你——我特地留了两个最大的。\n你接过来的时候，手指碰到了一起。\n她若无其事地走开了。";
+  },
+  function(){
+    D.m-=20;D.h-=8;
+    return "王扒皮今天心情极差。\n\n原因据说是被甲方爸爸骂了，方案改了第八版还没过。\n\n他在会议室吼：你们这群废物！我养你们有什么用？！\n声音穿透两层楼。\n\n全公司噤若寒蝉。你低头假装在改代码，实际上偷偷在群里跟周雨桐吐槽：\n他是不是更年期了？\n她回了一个捂嘴笑的表情，然后秒撤回了。";
+  },
+  function(){
+    D.l+=3;D.m+=10;
+    return "下午boss把你叫进办公室。\n你心里一紧，回想了一下最近有没有摸鱼被抓。\n\n结果是——他拍了拍你的肩膀：上个月绩效不错，继续加油。好好干。\n\n你松了口气。出来的时候周雨桐冲你眨了眨眼：boss找你干嘛？不会是要开了你吧？\n你苦笑：画饼呢。\n她笑了：那说明你重要啊。晚上我请你吃饭，安慰你。";
+  }
+];
+
+var TALKS=[
+  function(){
+    D.l+=5;
+    return pk([
+      "周雨桐推了推眼镜，压低声音：你知道为什么技术主管最近总去财务部吗？\n\n你摇头。\n她说：他跟财务大姐好上了。有人看到他俩上周六一起看电影。\n你惊了：不会吧？财务大姐都四十多了。\n她耸耸肩：那又怎样，人家有钱啊。",
+      "周雨桐一边吃薯片一边随意地问：你周末一般干嘛？\n\n你说：宅着。打游戏，睡觉。\n她说：不约会？\n你反问：跟谁约？\n她笑了笑：那你周末来我家呗，我养了只猫，可好撸了。别想多啊，就是让你来撸猫。但她的耳朵尖有点红。",
+      "午休的时候，周雨桐坐在你旁边吃外卖。\n她突然开口：你那个邻居……是不是跳舞的那个？\n你惊讶：你怎么知道？\n她说：我朋友在她那儿上课，说她身材绝了。她撇了撇嘴：你是不是天天偷看人家？\n你差点被饭呛到：我没有！\n她笑得很狡黠：行行行，没有就没有，急什么。"
+    ]);
+  },
+  function(){
+    D.l+=5;
+    return pk([
+      "加班到晚上九点，办公室里只剩你和周雨桐。\n\n她伸了个懒腰，T恤下摆拉起来一点，露出一截腰。\n你赶紧把目光移开。\n\n她问：饿不饿？我知道一家开很晚的烧烤店。\n你没来得及拒绝，她已经开始收拾东西了：走，我请客。",
+      "周雨桐趴在桌上问你：你以前谈过恋爱吗？\n\n话题来得太突然。你愣了一下：谈过。大学时候，毕业分了。\n她点头：一样。他要去北京，我不想异地。\n\n沉默了一会儿。\n你问：那现在呢？\n她歪头看着你：现在……我觉得在身边的最好。"
+    ]);
+  }
+];
+
+var AFTERS=[
+  function(){
+    am(5);
+    return pk([
+      "下班路上你去了趟便利店。阿强正在理货。\n\n他热情地打招呼：哟，来了！今天有新鲜的关东煮。\n你拿了几串，顺便问他：早上你说有人找我，到底长什么样？\n他想了想：嗯……长发，挺白的，穿个风衣。不太像你同事，倒像是……你欠了钱的？\n你骂了一句：滚。",
+      "地铁上人很多。你被挤在门边，旁边站着一个穿职业装的女生。\n\n一个急刹车，她没站稳，整个人撞到你身上。\n她连忙道歉：不好意思不好意思！\n你说：没事。\n她抬头看了你一眼，笑了笑。\n你们就这样面对面站了三站路，谁都没再说话。\n她下车的时候回头看了一眼。你有点后悔没要微信。"
+    ]);
+  },
+  function(){
+    am(-10);D.h-=3;
+    return "出地铁的时候下雨了，你没带伞。\n\n站在站口等雨小点，旁边一个男生也在躲雨。他看了你一眼：要不……一起走？我伞挺大的。\n\n你们共撑一把伞走了半条街。他说他是对面写字楼的程序员。\n到小区门口告别的时候，他犹豫了一下：能加个微信吗？\n\n你给了他。走了几步收到了他的好友申请。头像是一只柯基。";
+  },
+  function(){
+    D.h+=3;
+    return "今天难得准时下班。天还没全黑，夕阳把整条街染成橘色。\n\n你决定走回家——反正也不远，正好散散步。\n路过一家花店，门口摆着打折的满天星。\n\n你停下来看了几秒。老板娘探出头：买一束嘛，送给女朋友？\n你笑了：没有女朋友。\n她说：那就送给自己呗！\n\n你笑了，买了一束。回家插在了矿泉水瓶里。\n房间里多了一点生气。";
+  }
+];
+
+var NIGHTS=[
+  function(){
+    D.h-=5;D.l+=3;
+    return "洗完澡躺在床上刷手机。\n\n微信弹出一条消息——是林小雅发的。\n她说：今天听到你在哼歌，调子挺好听的。是什么歌？\n\n你心跳漏了一拍。你白天确实哼了几句，没想到她听到了。\n你回复她说：这世界那么多人。\n\n她回：好歌。我也喜欢。\n又补了一句：要不过来一起听？我买了新音响。\n\n你盯着屏幕看了三十秒。";
+  },
+  function(){
+    D.h+=5;
+    return "今晚特别安静。没有楼上的古筝，没有隔壁的噪音。\n\n你泡了杯茶，坐在窗边看夜景。\n这个城市亮着万家灯火，其中一盏是你的。\n\n你突然有点感慨。来这座城市三个月，从一个人都不认识到现在——\n楼下有阿强会跟你唠嗑，公司有周雨桐跟你一起吐槽boss，\n隔壁住着一个会让你心跳加速的姑娘。\n\n好像……也不是那么糟。";
+  },
+  function(){
+    D.l+=10;D.h-=5;
+    return "半夜被敲门声吵醒。\n\n你迷迷糊糊去开门——林小雅站在门口，穿着吊带睡裙。\n她的眼睛有点红，像是哭过。\n\n她说：对不起这么晚打扰你……我……能借你家待一会儿吗？\n\n你让开了门。她走进来坐在沙发上，抱着膝盖。\n你给她倒了杯水，坐在旁边。过了一会儿她开口说：\n我前男友刚才来找我了。喝多了。在楼下喊我名字。\n\n她苦笑了一下：我以为我已经把他忘了的。";
+  },
+  function(){
+    D.l+=5;D.h-=3;
+    return "正准备睡觉，听到隔壁传来隐隐约约的哭声。\n\n是林小雅。\n\n你犹豫了一会儿——要不要去敲门？\n去了会不会太唐突？\n不去的话……她听起来真的很伤心。\n\n你站在门口，手抬起来又放下。";
+  }
+];
+
+var SPICYS=[
+  function(){
+    D.l+=8;
+    return "你正在洗澡，听到浴室门锁咔嗒响了一声。\n\n你僵住了。水还在哗哗地流。\n你试探着喊了一句：有人吗？\n没有回应。\n\n你关掉水，屏住呼吸听了一会儿。外面很安静。\n你快速擦干穿好衣服出来——房间空无一人。\n\n但门锁确实动过。\n你后背有点发凉。";
+  },
+  function(){
+    D.l+=10;D.h-=3;
+    return "在地铁上，你旁边坐了一个非常好看的女生。\n\n她穿着白色连衣裙，腿上放着一个琴盒。大概是学乐器的。\n她戴着耳机，闭着眼睛，睫毛很长。\n\n列车颠簸的时候她睁开了眼，正好对上你的目光。\n她没躲，反而对你笑了一下。\n\n你赶紧看向别处。心脏砰砰跳。\n到站的时候她站起来，经过你身边时塞了一张纸条在你手里。\n\n下车后你打开——是一个微信号。";
+  },
+  function(){
+    D.l+=5;D.h+=3;
+    return "你点了一份外卖。半小时后门铃响了。\n\n打开门——是林小雅。她拎着你的外卖。\n\n她说：刚好下楼看到外卖小哥在你门口，就帮你拿上来了。\n你接过来，闻到一阵沐浴露的香味。\n她穿着宽松的T恤和短裤，头发是湿的。\n\n她说：刚洗完澡。晚安。\n\n她转身回了隔壁。你关上门，闻了闻空气里残留的香味。";
+  },
+  function(){
+    D.h-=8;D.l+=5;
+    return "你做了个梦。\n\n梦里你在一间教室里，旁边坐着一个看不清脸的女生。\n她在跟你说话，但声音像是隔着一层水。\n\n你努力想听清她在说什么。她凑过来，越来越近——\n\n然后你醒了。\n\n一身汗。心跳很快。窗外天微微亮了。\n\n你翻了个身，发现枕头旁边放着一张纸条：\n早上好。昨晚你说了梦话。挺可爱的。——隔壁";
+  }
+];
+
+var ROMANCES=[
+  function(){
+    if(D.s!=="male")return null;
+    D.l+=12;D.h-=3;
+    return "周末下午，你正在家打游戏，听到敲门声。\n\n是林小雅。她穿着一条碎花连衣裙，头发扎了起来。\n她说：我刚烤了曲奇，太多了吃不完，给你送点。\n\n你接过盒子，闻到奶香味。盒子上还贴着便利贴：\n少打点游戏，多出门走走。——隔壁\n\n你笑了。听到自己说：要不要进来坐坐？\n\n她愣了一下，然后弯了弯嘴角：好啊。\n\n她走进你的房间，扫了一圈：比我想象中整洁。\n你问：你想象过？\n她没回答，坐在了你旁边的椅子上。\n\n这个下午，你们聊了三个小时。";
+  },
+  function(){
+    if(D.s!=="female")return null;
+    D.l+=12;D.h-=3;
+    return "周末晚上，你正敷着面膜追剧，听到敲门声。\n\n打开门——是隔壁那个神秘邻居。他穿着一件简单的白T恤，看起来刚运动完。\n他说：楼下快递员说你的包裹，我帮你拿上来了。\n\n你接过那个箱子，挺沉。你说了声谢谢。\n他看了一眼你的脸——上面还贴着面膜。\n他笑了一下：你这面膜什么牌子的？看起来不错。\n\n你愣了一下才反应过来他在开玩笑。\n你听到自己说：要不要……进来坐坐？";
+  },
+  function(){
+    D.l+=15;
+    if(D.s==="male")return "公司团建去了KTV。\n\n几轮酒下来，气氛嗨了。技术主管在唱死了都要爱，破了八个音。\n你坐在角落里，周雨桐坐了过来。\n\n她喝得有点多了，脸颊红红的。\n她凑近你，说话带着酒气：你知道吗，我挺喜欢你的。\n\n音乐声很大，但你听得很清楚。\n\n你没说话。她靠在你肩膀上，闭上了眼睛。\n\n包厢里其他人还在闹。你的心跳快得像打鼓。";
+    return "公司团建去了KTV。\n\n几轮酒下来气氛嗨了。你坐在角落里，陆远坐了过来。\n他喝得不少，眼神有点迷离。\n\n他说：你唱歌应该挺好听的。看你平时说话的声音就知道。\n\n你还没回答，他已经拿起话筒递给你：来一首？我陪你唱。\n\n他点了一首《小酒窝》。\n你们合唱的时候，他一直看着你笑。";
+  }
+];
+
+var SLEEPLATES=[
+  "你刷着手机，不知不觉到了一点。\n睡前看了一眼微信——朋友圈有个红点。\n是林小雅两分钟前发的：一张月亮照片，配文写着「有人也睡不着吗」。\n你犹豫了一下，点了个赞。\n几乎是立刻，她把那条朋友圈删了。\n\n你有点懵。",
+  "你在B站刷到一个擦边视频合集。看了半小时。\n然后良心发现地关掉了。\n睡前想了一下——今天好像也没干啥正事。\n算了，明天再说。",
+  "你在跟网友打游戏。打了三把，输了三把。\n队友在语音里骂人。你默默关掉了游戏。\n微信上有条未读消息——周雨桐发的：睡了吗？\n你看了看时间：凌晨00:47。\n你回了个：还没。\n她秒回了一个笑脸。"
+];
+
+// === SCENES ===
+sn.start={im:"🌃",t:"社畜生活",d:"文字剧情游戏。\n你扮演一个在大城市打拼的年轻人。\n所有故事和对话都是随机生成的，每次重玩不同。\n\n先选角色：",ch:[
+  {t:"👨 男生线（社畜小哥）",e:function(){D.s="male"},g:"intro"},
+  {t:"👩 女生线（社畜妹子）",e:function(){D.s="female"},g:"intro"}
 ]};
 
-sn.intro={im:D.sex==="male"?"👨‍💻":"👩‍💻",t:function(){return D.sex==="male"?"男生开局":"女生开局"},d:function(){
-  if(D.sex==="male")return "你在这个城市第三个月，兜里一千块。\n\n邻居林小雅——舞蹈老师，晚上偶尔能听到她在家里练舞的声音。\n楼下阿强开了家便利店，什么八卦都瞒不过他。\n公司的周雨桐，长得好看，代码写得也不错。\n\n这就是你的世界了。";
-  return "你在这个城市第一个月，租在老小区。\n\n隔壁男邻居帅得离谱，但神出鬼没。\n阿强天天八卦，说他见过这男的开跑车。\n公司有个帅同事叫陆远，对你挺照顾。\n\n这就是你的世界了。";
-},ci:[
-  {t:"🚶 开始新的一天",e:function(){},g:"newday"}
+sn.intro={im:function(){return D.s==="male"?"👨‍💻":"👩‍💻"},t:"开局",d:function(){
+  if(D.s==="male")return "你叫小陈，25岁，在这个城市第三个月。\n隔壁住着林小雅——舞蹈老师。\n楼下阿强的便利店。\n公司的周雨桐，前端开发。\n\n存款不多，但日子过得还行。";
+  return "你叫小陈，24岁，在这个城市第一个月。\n隔壁住着神秘男邻居。\n楼下阿强的便利店。\n公司的陆远，产品经理。\n\n一切才刚刚开始。";
+},ch:[
+  {t:"开始新的一天",e:function(){},g:"day_morning"}
 ]};
 
-sn.newday={im:"☀️",t:function(){return"第"+D.day+"天"},d:function(){
-  var day=dailyLife();
-  // 随机桃花事件
+sn.day_morning={im:"🌅",t:function(){return"第"+D.d+"天 · 早晨"},d:function(){return pk(MORNINGS)();},ch:[
+  {t:"去上班",e:function(){},g:"day_office"}
+]};
+
+sn.day_office={im:"💼",t:"公司日常",d:function(){
+  var o=pk(OFFICES)();
+  if(Math.random()>0.5)o+="\n\n---\n\n"+pk(TALKS)();
+  return o;
+},ch:[
+  {t:"继续工作",e:function(){D.d++;},g:"day_afterwork"},
+  {t:"找人聊天",e:function(){},g:"day_chat"}
+]};
+
+sn.day_chat={im:"💬",t:"摸鱼时间",d:function(){return pk(TALKS)();},ch:[
+  {t:"下班了",e:function(){D.d++;},g:"day_afterwork"},
+  {t:"再聊一会儿",e:function(){D.l+=3;},g:"day_chat"}
+]};
+
+sn.day_afterwork={im:"🌆",t:"下班路上",d:function(){
+  var o=pk(AFTERS)();
   if(Math.random()>0.6){
-    D.lv+=Math.floor(Math.random()*8)+2;
-    day+="\n\n💕 桃花信号："+rp(CHATS.lover);
+    var r=pk(ROMANCES);
+    if(r){var t=r();if(t)o+="\n\n---\n\n"+t;}
   }
-  // 随机加班扣hp
-  if(Math.random()>0.7){
-    D.hp-=Math.floor(Math.random()*8)+3;
-    day+="\n\n😫 今天加班到很晚，累死了。";
-  }else{
-    D.hp+=Math.floor(Math.random()*5)+1;
-  }
-  // 随机收入
-  D.mon+=Math.floor(Math.random()*15)+5;
-  // 随机扣除
-  if(Math.random()>0.6)D.mon-=Math.floor(Math.random()*30)+10;
-  // 掉落物
-  if(Math.random()>0.7){
-    D.fl.rand=getItem();
-    day+="\n\n🎁 你捡到了："+D.fl.rand;
-  }
-  return day;
-},ci:[
-  {t:"💬 跟同事聊天",e:function(){D.lv+=Math.floor(Math.random()*4)+1},g:"chat"},
-  {t:"🌙 结束这一天",e:function(){D.day++;if(D.hp<20){go("go");return}},g:"night"},
-  {t:"🔄 重开一局",e:function(){},g:"start"}
+  return o;
+},ch:[
+  {t:"回家休息",e:function(){},g:"day_night"}
 ]};
 
-sn.chat={im:"💬",t:"八卦时间",d:function(){
-  var t=[];
-  t.push(rp(CHATS.colleague));
-  if(D.sex==="male")t.push("周雨桐今天穿了一条短裙。你多看了两眼。");
-  else t.push("陆远今天穿了件白衬衫，袖子挽到手肘，挺帅。");
-  if(Math.random()>0.5)t.push(rp(EVENTS.spicy));
-  return t.join("\n\n");
-},ci:[
-  {t:"继续聊天",e:function(){D.lv+=Math.floor(Math.random()*3)+1},g:"chat"},
-  {t:"回去工作",e:function(){},g:"newday"},
-  {t:"下班回家",e:function(){D.day++;},g:"night"}
+sn.day_night={im:"🌙",t:function(){return"第"+D.d+"天 · 夜晚"},d:function(){
+  var n=pk(NIGHTS)();
+  if(Math.random()>0.6)n+="\n\n---\n\n"+pk(SPICYS)();
+  return n;
+},ch:[
+  {t:"😴 睡觉，明天又是新的一天",e:function(){ah(8);D.d++;},g:"day_morning"},
+  {t:"📱 熬夜再玩一会儿",e:function(){ah(-5);D.l+=3;},g:"day_sleeplate"},
+  {t:"🔄 重新开始",e:function(){},g:"start"}
 ]};
 
-sn.night={im:"🌙",t:function(){return"第"+D.day+"天 · 夜晚"},d:function(){
-  var t=[];
-  t.push(rp(EVENTS.night));
-  if(Math.random()>0.5)t.push(rp(EVENTS.spicy));
-  // 深夜邻居事件
-  if(Math.random()>0.5){
-    if(D.sex==="male")t.push("\n💕 隔壁传来音乐声和轻微的脚步声——林小雅在练舞。你忍不住想象了一下那个画面。");
-    else t.push("\n💕 隔壁传来吉他声。歌声低沉温柔。你在窗边听了一会儿。");
-    D.lv+=3;
-  }
-  return t.join("\n\n");
-},ci:[
-  {t:"😴 睡觉",e:function(){D.hp+=Math.floor(Math.random()*10)+5;},g:"newday"},
-  {t:"📱 熬夜刷手机",e:function(){D.hp-=Math.floor(Math.random()*6)+2;D.lv+=Math.floor(Math.random()*3)+1},g:"phone"},
-  {t:"🔄 重开",e:function(){},g:"start"}
+sn.day_sleeplate={im:"📱",t:"深夜躺平",d:function(){return pk(SLEEPLATES);},ch:[
+  {t:"睡了",e:function(){D.d++;},g:"day_morning"}
 ]};
-
-sn.phone={im:"📱",t:"深夜刷手机",d:function(){return rp([
-  "刷到林小雅的抖音——一段现代舞，穿得很少。评论区快炸了。",
-  "一个情感博主的视频：社畜的恋爱指南。你认真看完了。",
-  "擦边直播间跳得正嗨。你心虚地看了一眼门口。",
-  "你在社交软件上划到了一个很match的人。犹豫要不要右滑。",
-  "看到一个帖子：你的邻居做过最让你心跳加速的事。评论区太精彩了。",
-  "前任发了新动态——跟新欢在海边。你默默划走。",
-  "舞蹈区UP主又更新了。你点了赞，收藏，然后陷入了贤者时间。"
-]);},ci:[
-  {t:"睡了",e:function(){D.day++;},g:"newday"}
-]};
-
-// 随机物品
-function getItem(){
-  return rp([
-    "一张彩票（没中）","一张彩票（中了20块！）","一把雨伞","一枚硬币","半包纸巾",
-    "一根充电线","一本旧书《如何征服美少女》","一张刮刮乐","地铁卡",
-    "一盒未拆封的TT（？？？）","小林的发卡","一张酒吧名片"
-  ]);
-}
 
 sn.go={im:"💀",t:"游戏结束",d:function(){
-  if(D.hp<=0)return "你的身体扛不住了。在这个城市拼了"+D.day+"天后，终于倒下了。\n\n下次对自己好一点吧。\n\n存活天数："+D.day;
-  return "你选择了离开这座城市。\n\n在这里的"+D.day+"天，有笑有泪。\n\n也许有一天还会回来。";
-},ci:[
-  {t:"🔄 重头再来",e:function(){},g:"start"}
+  if(D.h<=0)return "你的身体扛不住了。\n在这个城市打拼了"+D.d+"天，终于撑不住了。\n下次对自己好一点。";
+  return "你选择离开了这座城市。\n在这里的"+D.d+"天里，你经历了很多。\n也许有一天你会回来。";
+},ch:[
+  {t:"🔄 重来一次",e:function(){},g:"start"}
 ]};
 
-// ====== 启动 ======
-init();go("start");
+ini();go("start");
 </script>
 </body>
 </html>
